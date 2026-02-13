@@ -6,7 +6,7 @@ SRTla receiver with support for multiple streams and statistics integration.
 
 This project is based on the following components:
 
-- SRT: [onsmith/srt](https://github.com/onsmith/srt)
+- SRT: [OpenIRL/srt](https://github.com/OpenIRL/srt)
 - SRTla: [OpenIRL/srtla](https://github.com/OpenIRL/srtla)
 - SRT-Live-Server: [OpenIRL/srt-live-server](https://github.com/OpenIRL/srt-live-server)
 
@@ -70,8 +70,8 @@ To use the started container, open the management URL (e.g., `http://127.0.0.1:3
 
 | Type    | URL                                                                   |
 |---------|-----------------------------------------------------------------------|
-| Schema  | `srt://<your-ip>:4001?streamid=<play-key>`                            |
-| Example | `srt://127.0.0.1:4001?streamid=play_60a0055a7fdb436d92fab3a943f5c55c` |
+| Schema  | `srt://<your-ip>:4000?streamid=<play-key>`                            |
+| Example | `srt://127.0.0.1:4000?streamid=play_60a0055a7fdb436d92fab3a943f5c55c` |
 
 ## Statistics Integration
 
@@ -84,7 +84,7 @@ The SRTla Receiver provides a statistics interface that can be used for integrat
 | Schema  | `http://<your-ip>:8080/stats/<play-id>`                             |
 | Example | `http://127.0.0.1:8080/stats/play_60a0055a7fdb436d92fab3a943f5c55c` |
 
-### Statistics Endpoint (Legacy)
+### Statistics Endpoint Legacy (NOALBS version < 2.14.0)
 
 | Type             | URL                                                                          |
 |------------------|------------------------------------------------------------------------------|
@@ -96,6 +96,30 @@ The SRTla Receiver provides a statistics interface that can be used for integrat
 To use the SRTla Receiver with NOALBS, you can specify the statistics endpoint in your NOALBS configuration. This allows
 for automatic scene switching based on stream metrics.
 Example NOALBS configuration:
+
+```json
+{
+   # rest of the config ...
+      "switcher": {
+         # rest of the config ...
+            "streamServers": [
+                {
+                  "streamServer": {
+                     "type": "OpenIRL",
+                     "statsUrl": "http://127.0.0.1:8080/stats/play_60a0055a7fdb436d92fab3a943f5c55c"
+                  },
+                  "name": "Stream",
+                  "priority": 0,
+                  "enabled": true
+               }
+            ]
+         # rest of the config ...
+      }
+   # rest of the config ...
+}
+```
+<details>
+<summary>NOLABS Version < 2.14.0</summary>
 
 ```json
 {
@@ -119,6 +143,8 @@ Example NOALBS configuration:
    # rest of the config ...
 }
 ```
+
+</details>
 
 ## Troubleshooting
 

@@ -2,6 +2,7 @@ services:
   sls-management-ui:
     image: ghcr.io/openirl/sls-management-ui:latest
     container_name: sls-management-ui
+    restart: unless-stopped
     environment:
       REACT_APP_BASE_URL: "${APP_URL}"
       REACT_APP_SRT_PLAYER_PORT: "${SRT_PLAYER_PORT:-4000}"
