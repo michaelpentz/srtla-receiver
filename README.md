@@ -6,7 +6,7 @@ SRTla receiver with support for multiple streams and statistics integration.
 
 This project is based on the following components:
 
-- SRT: [onsmith/srt](https://github.com/onsmith/srt)
+- SRT: [OpenIRL/srt](https://github.com/OpenIRL/srt)
 - SRTla: [OpenIRL/srtla](https://github.com/OpenIRL/srtla)
 - SRT-Live-Server: [OpenIRL/srt-live-server](https://github.com/OpenIRL/srt-live-server)
 
