@@ -17,7 +17,7 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 # Clone and build SRTla
-RUN git clone -b ${SRTLA_BRANCH} https://github.com/OpenIRL/srtla.git srtla \
+RUN git clone -b ${SRTLA_BRANCH} https://github.com/michaelpentz/srtla.git srtla \
     && cd srtla \
     && git submodule update --init --recursive \
     && cmake . \
@@ -58,7 +58,7 @@ COPY --from=sls-stage /etc/sls/sls.conf /etc/sls/sls.conf
 COPY conf/supervisord.conf /etc/supervisord.conf
 
 # Expose ports
-EXPOSE 5000/udp 4000/udp 4001/udp 8080/tcp
+EXPOSE 5000/udp 4000/udp 4001/udp 8080/tcp 5080/tcp
 
 # Start supervisor
 CMD ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
