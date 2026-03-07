@@ -13,7 +13,7 @@ WORKDIR /tmp
 
 # Install required packages
 RUN apk update \
-    && apk add --no-cache linux-headers alpine-sdk cmake tcl openssl-dev zlib-dev spdlog spdlog-dev \
+    && apk add --no-cache linux-headers alpine-sdk cmake tcl openssl-dev zlib-dev spdlog spdlog-dev libmaxminddb-dev \
     && rm -rf /var/cache/apk/*
 
 # Clone and build SRTla
@@ -34,7 +34,7 @@ FROM alpine:3.20
 ENV LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib64
 
 RUN apk update \
-    && apk add --no-cache openssl libstdc++ supervisor coreutils spdlog perl \
+    && apk add --no-cache openssl libstdc++ supervisor coreutils spdlog perl libmaxminddb \
     && rm -rf /var/cache/apk/*
 
 # Create service users for security isolation
@@ -50,6 +50,9 @@ COPY --from=sls-stage /usr/local/lib/libsrt* /usr/local/lib
 
 # Copy binary files from the repo
 COPY --chmod=755 bin/logprefix /bin/logprefix
+
+# Copy GeoIP ASN database for carrier identification
+COPY --chmod=644 data/GeoLite2-ASN.mmdb /usr/share/GeoIP/GeoLite2-ASN.mmdb
 
 # Copy configuration files from the srt-live-server
 COPY --from=sls-stage /etc/sls/sls.conf /etc/sls/sls.conf
