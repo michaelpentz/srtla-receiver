@@ -51,8 +51,8 @@ COPY --from=sls-stage /usr/local/lib/libsrt* /usr/local/lib
 # Copy binary files from the repo
 COPY --chmod=755 bin/logprefix /bin/logprefix
 
-# Copy GeoIP ASN database for carrier identification
-COPY --chmod=644 data/GeoLite2-ASN.mmdb /usr/share/GeoIP/GeoLite2-ASN.mmdb
+# Copy GeoIP ASN database if available (optional — gracefully degrades without it)
+COPY data/GeoLite2-ASN.mmd[b] /usr/share/GeoIP/
 
 # Copy configuration files from the srt-live-server
 COPY --from=sls-stage /etc/sls/sls.conf /etc/sls/sls.conf
