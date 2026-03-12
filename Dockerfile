@@ -52,7 +52,7 @@ COPY --from=sls-stage /usr/local/lib/libsrt* /usr/local/lib
 COPY --chmod=755 bin/logprefix /bin/logprefix
 
 # Copy GeoIP ASN database if available (optional — gracefully degrades without it)
-COPY data/GeoLite2-ASN.mmd[b] /usr/share/GeoIP/
+COPY data/ipinfo_lite.mmd[b] /usr/share/GeoIP/
 
 # Copy configuration files from the srt-live-server
 COPY --from=sls-stage /etc/sls/sls.conf /etc/sls/sls.conf
