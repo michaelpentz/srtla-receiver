@@ -25,6 +25,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
+          build-args: |
+            CACHEBUST=${{ github.sha }}
           tags: |
             ghcr.io/michaelpentz/srtla-receiver:latest
             ghcr.io/michaelpentz/srtla-receiver:${{ github.sha }}

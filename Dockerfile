@@ -16,7 +16,8 @@ RUN apk update \
     && apk add --no-cache linux-headers alpine-sdk cmake tcl openssl-dev zlib-dev spdlog spdlog-dev libmaxminddb-dev \
     && rm -rf /var/cache/apk/*
 
-# Clone and build SRTla
+# Clone and build SRTla (CACHEBUST forces fresh clone when srtla repo changes)
+ARG CACHEBUST=1
 RUN git clone -b ${SRTLA_BRANCH} https://github.com/michaelpentz/srtla.git srtla \
     && cd srtla \
     && git submodule update --init --recursive \
