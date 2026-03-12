@@ -18,6 +18,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download IPinfo Lite ASN database
+        run: curl -fsSL "https://ipinfo.io/data/ipinfo_lite.mmdb?token=${{ secrets.IPINFO_TOKEN }}" -o data/ipinfo_lite.mmdb
       - uses: docker/build-push-action@v5
         with:
           context: .
