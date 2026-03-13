@@ -52,8 +52,8 @@ COPY --from=sls-stage /usr/local/lib/libsrt* /usr/local/lib
 # Copy binary files from the repo
 COPY --chmod=755 bin/logprefix /bin/logprefix
 
-# Copy GeoIP ASN database if available (optional — gracefully degrades without it)
-COPY data/ipinfo_lite.mmd[b] /usr/share/GeoIP/
+# GeoIP ASN database is volume-mounted from the host AMI at runtime
+# (see docker-compose volume mount for /usr/share/GeoIP/ipinfo_lite.mmdb)
 
 # Copy configuration files from the srt-live-server
 COPY --from=sls-stage /etc/sls/sls.conf /etc/sls/sls.conf
