@@ -25,6 +25,16 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+    read_only: true
+    tmpfs:
+      - /var/log:size=50m
+      - /var/run:size=1m
+      - /tmp:size=10m
     ports:
       - "${SLS_STATS_PORT}:8080/tcp"
       - "${SRTLA_PORT}:5000/udp"
